@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Progress } from "@/components/ui/progress";
-import { ArrowRight, Check, Coins, PiggyBank, Roadmap, Calendar } from "lucide-react";
+import { ArrowRight, Check, Coins, PiggyBank, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -113,7 +113,7 @@ const SignUp = () => {
               </Button>
             </div>
             <div className="hidden md:flex items-center justify-center">
-              <Roadmap className="h-32 w-32 text-primary animate-bounce" />
+              <Coins className="h-32 w-32 text-primary animate-bounce" />
             </div>
           </div>
         );
