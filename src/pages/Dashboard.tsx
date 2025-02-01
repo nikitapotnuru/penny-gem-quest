@@ -12,6 +12,7 @@ import {
   Diamond
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/Logo";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -28,9 +29,7 @@ const Dashboard = () => {
           <Button variant="ghost" size="icon" onClick={toggleSidebar}>
             <Menu className="h-6 w-6" />
           </Button>
-          <Link to="/dashboard" className="flex items-center gap-2">
-            <span className="font-bold text-xl">PennyPilot</span>
-          </Link>
+          <Logo />
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <Diamond className="h-5 w-5 text-primary" />
@@ -50,6 +49,9 @@ const Dashboard = () => {
         } w-64 bg-background border-r transition-transform duration-200 ease-in-out z-20 md:translate-x-0`}
       >
         <div className="p-4 space-y-4">
+          <div className="flex justify-center mb-4">
+            <Logo />
+          </div>
           <nav className="space-y-2">
             <Link
               to="/dashboard"

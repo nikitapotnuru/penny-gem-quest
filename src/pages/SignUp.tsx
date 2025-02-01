@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Logo } from "@/components/Logo";
 
 const SignUp = () => {
   const [step, setStep] = useState(1);
@@ -208,6 +209,9 @@ const SignUp = () => {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-4xl space-y-8">
+        <div className="flex justify-center mb-8">
+          <Logo />
+        </div>
         <div className="space-y-2">
           <h1 className="text-3xl font-bold text-center">Welcome to PennyPilot</h1>
           <Progress value={(step / totalSteps) * 100} className="w-full" />
