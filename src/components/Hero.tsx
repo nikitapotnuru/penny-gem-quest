@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Hero = () => {
   return (
@@ -17,10 +18,10 @@ export const Hero = () => {
           Free financial courses, age-smart learning, and rewards that make managing money both educational and enjoyable.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-up" style={{ animationDelay: "0.5s" }}>
-          <button className="px-8 py-3 bg-primary hover:bg-primary-hover text-white rounded-lg flex items-center gap-2 transform transition-all hover:translate-y-[-2px]">
+          <Link to="/signup" className="px-8 py-3 bg-primary hover:bg-primary-hover text-white rounded-lg flex items-center gap-2 transform transition-all hover:translate-y-[-2px]">
             Get Started
             <ArrowRight className="w-5 h-5" />
-          </button>
+          </Link>
           <button className="px-8 py-3 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-lg transition-all hover:border-gray-300">
             Learn More
           </button>

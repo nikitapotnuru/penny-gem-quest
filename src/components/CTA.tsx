@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const CTA = () => {
   return (
@@ -8,10 +9,13 @@ export const CTA = () => {
         <p className="text-lg md:text-xl mb-8 opacity-90 max-w-2xl mx-auto">
           Join thousands of users who are already mastering their finances with PennyPilot.
         </p>
-        <button className="px-8 py-3 bg-white text-primary hover:bg-gray-100 rounded-lg flex items-center gap-2 mx-auto transform transition-all hover:translate-y-[-2px]">
+        <Link
+          to="/signup"
+          className="px-8 py-3 bg-white text-primary hover:bg-gray-100 rounded-lg flex items-center gap-2 mx-auto w-fit transform transition-all hover:translate-y-[-2px]"
+        >
           Get Started Now
           <ArrowRight className="w-5 h-5" />
-        </button>
+        </Link>
       </div>
     </section>
   );
