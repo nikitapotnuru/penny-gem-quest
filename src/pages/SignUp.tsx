@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   const [step, setStep] = useState(1);
   const totalSteps = 5;
+  const [age, setAge] = useState(25);
   const navigate = useNavigate();
 
   const nextStep = () => {
@@ -20,8 +21,6 @@ const SignUp = () => {
       setStep(step + 1);
     }
   };
-
-  // ... keep existing code (renderStep cases 1-4)
 
   const renderStep = () => {
     switch (step) {
@@ -74,9 +73,34 @@ const SignUp = () => {
                   <Label htmlFor="username">Username</Label>
                   <Input id="username" placeholder="Choose a username" />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-4">
                   <Label>Age</Label>
-                  <Slider defaultValue={[25]} max={65} min={13} step={1} />
+                  <div className="flex items-center gap-4">
+                    <Input 
+                      type="number" 
+                      min={13} 
+                      max={65} 
+                      value={age} 
+                      onChange={(e) => {
+                        const value = parseInt(e.target.value);
+                        if (value >= 13 && value <= 65) {
+                          setAge(value);
+                        }
+                      }}
+                      className="w-24"
+                    />
+                    <Slider 
+                      value={[age]} 
+                      onValueChange={(value) => setAge(value[0])} 
+                      max={65} 
+                      min={13} 
+                      step={1}
+                      className="flex-1"
+                    />
+                  </div>
+                  <span className="text-sm text-muted-foreground">
+                    Age must be between 13 and 65
+                  </span>
                 </div>
                 <Button className="w-full" onClick={nextStep}>
                   Continue <ArrowRight className="ml-2 h-4 w-4" />

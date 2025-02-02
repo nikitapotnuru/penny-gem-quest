@@ -33,6 +33,15 @@ const Dashboard = () => {
     });
   };
 
+  const handleHomeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate('/dashboard');
+    toast({
+      title: "Navigation",
+      description: "Welcome to your dashboard",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -72,6 +81,7 @@ const Dashboard = () => {
           <nav className="space-y-2">
             <Link
               to="/dashboard"
+              onClick={handleHomeClick}
               className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
             >
               <Home className="h-5 w-5" />
