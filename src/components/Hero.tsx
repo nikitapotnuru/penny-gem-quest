@@ -1,19 +1,7 @@
 import { ArrowRight } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
-import { useToast } from "@/components/ui/use-toast";
+import { Link } from "react-router-dom";
 
 export const Hero = () => {
-  const navigate = useNavigate();
-  const { toast } = useToast();
-
-  const handleHomeClick = () => {
-    navigate('/dashboard');
-    toast({
-      title: "Navigation",
-      description: "Welcome to your dashboard",
-    });
-  };
-
   return (
     <section className="min-h-[80vh] flex items-center justify-center px-4 animate-fade-in">
       <div className="max-w-6xl mx-auto text-center">
@@ -34,10 +22,8 @@ export const Hero = () => {
             Get Started
             <ArrowRight className="w-5 h-5" />
           </Link>
-          <button 
-            onClick={handleHomeClick}
-            className="px-8 py-3 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-lg transition-all hover:border-gray-300">
-            Home
+          <button className="px-8 py-3 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-lg transition-all hover:border-gray-300">
+            Learn More
           </button>
         </div>
       </div>
