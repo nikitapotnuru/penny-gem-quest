@@ -8,16 +8,20 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Logo } from "@/components/Logo";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [step, setStep] = useState(1);
   const totalSteps = 5;
+  const navigate = useNavigate();
 
   const nextStep = () => {
     if (step < totalSteps) {
       setStep(step + 1);
     }
   };
+
+  // ... keep existing code (renderStep cases 1-4)
 
   const renderStep = () => {
     switch (step) {
@@ -187,7 +191,7 @@ const SignUp = () => {
                   </div>
                 </RadioGroup>
                 <div className="flex gap-4">
-                  <Button variant="outline" className="flex-1">
+                  <Button variant="outline" className="flex-1" onClick={() => navigate('/dashboard')}>
                     Skip & Finish
                   </Button>
                   <Button className="flex-1">

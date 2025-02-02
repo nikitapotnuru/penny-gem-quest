@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Home,
   BarChart2,
@@ -9,16 +9,28 @@ import {
   LogOut,
   Menu,
   User,
-  Diamond
+  Diamond,
+  Undo2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
+import { useToast } from "@/components/ui/use-toast";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleUndo = () => {
+    navigate(-1);
+    toast({
+      title: "Action undone",
+      description: "You've gone back to the previous page",
+    });
   };
 
   return (
@@ -26,9 +38,14 @@ const Dashboard = () => {
       {/* Header */}
       <header className="border-b">
         <div className="flex items-center justify-between p-4">
-          <Button variant="ghost" size="icon" onClick={toggleSidebar}>
-            <Menu className="h-6 w-6" />
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" onClick={toggleSidebar}>
+              <Menu className="h-6 w-6" />
+            </Button>
+            <Button variant="ghost" size="icon" onClick={handleUndo}>
+              <Undo2 className="h-6 w-6" />
+            </Button>
+          </div>
           <Logo />
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
