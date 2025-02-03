@@ -9,12 +9,14 @@ import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Logo } from "@/components/Logo";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const SignUp = () => {
   const [step, setStep] = useState(1);
   const totalSteps = 5;
   const [age, setAge] = useState(25);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const nextStep = () => {
     if (step < totalSteps) {
@@ -215,10 +217,25 @@ const SignUp = () => {
                   </div>
                 </RadioGroup>
                 <div className="flex gap-4">
-                  <Button variant="outline" className="flex-1" onClick={() => navigate('/dashboard')}>
+                  <Button variant="outline" className="flex-1" onClick={() => {
+                    toast({
+                      title: "Welcome to PennyPilot!",
+                      description: "Your account has been created. Let's start your financial journey!",
+                    });
+                    navigate('/dashboard');
+                  }}>
                     Skip & Finish
                   </Button>
-                  <Button className="flex-1">
+                  <Button 
+                    className="flex-1" 
+                    onClick={() => {
+                      toast({
+                        title: "Starting Quiz",
+                        description: "Let's test your financial knowledge!",
+                      });
+                      navigate('/quiz');
+                    }}
+                  >
                     Take Quick Quiz
                   </Button>
                 </div>

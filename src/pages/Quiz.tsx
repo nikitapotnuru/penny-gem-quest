@@ -173,6 +173,10 @@ const questions: Record<Difficulty, Question[]> = {
   ]
 };
 
+const calculateRewardPoints = (score: number): number => {
+  return score * 10; // 1 correct = 10 points, 2 correct = 20 points, etc.
+};
+
 const getMotivationalMessage = (score: number): string => {
   switch (score) {
     case 1:
@@ -184,18 +188,14 @@ const getMotivationalMessage = (score: number): string => {
     case 4:
       return "Impressive! You're really getting the hang of this!";
     case 5:
-      return "Perfect score! You're a financial wizard!";
+      return "Fantastic! You're a financial whiz—keep up the amazing work!";
     default:
       return "Keep practicing to improve your financial knowledge!";
   }
 };
 
-const calculateRewardPoints = (score: number): number => {
-  return score * 10;
-};
-
 const Quiz = () => {
-  const [difficulty, setDifficulty] = useState<Difficulty | null>(null);
+  const [difficulty, setDifficulty] = useState<"beginner" | "intermediate" | "expert" | null>(null);
   const [currentAnswers, setCurrentAnswers] = useState<number[]>([]);
   const [isCompleted, setIsCompleted] = useState(false);
   const [score, setScore] = useState(0);
@@ -204,7 +204,7 @@ const Quiz = () => {
 
   console.log("Quiz component rendered with difficulty:", difficulty);
 
-  const handleDifficultySelect = (selected: Difficulty) => {
+  const handleDifficultySelect = (selected: "beginner" | "intermediate" | "expert") => {
     console.log("Selected difficulty:", selected);
     setDifficulty(selected);
     setCurrentAnswers(new Array(5).fill(-1));
@@ -254,7 +254,7 @@ const Quiz = () => {
           {["beginner", "intermediate", "expert"].map((level) => (
             <Card key={level} className="p-6 hover:shadow-lg transition-shadow">
               <Button
-                onClick={() => handleDifficultySelect(level as Difficulty)}
+                onClick={() => handleDifficultySelect(level as "beginner" | "intermediate" | "expert")}
                 className="w-full"
                 variant="outline"
               >
