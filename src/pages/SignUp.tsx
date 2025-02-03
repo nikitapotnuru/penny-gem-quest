@@ -157,6 +157,9 @@ const SignUp = () => {
                     Age must be between 13 and 65
                   </span>
                 </div>
+                <Button className="w-full" onClick={nextStep}>
+                  Continue <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
               </div>
             </div>
             <div className="hidden md:flex items-center justify-center">
@@ -245,8 +248,9 @@ const SignUp = () => {
                   <Button 
                     onClick={nextStep}
                     disabled={!incomeSource || !monthlyIncome || (incomeSource === "other" && !otherIncomeSource)}
+                    className="flex-1"
                   >
-                    Next
+                    Continue
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
