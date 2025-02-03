@@ -10,7 +10,8 @@ import {
   Menu,
   User,
   Diamond,
-  Undo2
+  Undo2,
+  ArrowLeft
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
@@ -23,6 +24,10 @@ const Dashboard = () => {
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
   };
 
   const handleUndo = () => {
@@ -75,8 +80,11 @@ const Dashboard = () => {
         } w-64 bg-background border-r transition-transform duration-200 ease-in-out z-20 md:translate-x-0`}
       >
         <div className="p-4 space-y-4">
-          <div className="flex justify-center mb-4">
+          <div className="flex justify-between items-center mb-4">
             <Logo />
+            <Button variant="ghost" size="icon" onClick={closeSidebar}>
+              <ArrowLeft className="h-6 w-6" />
+            </Button>
           </div>
           <nav className="space-y-2">
             <Link
@@ -92,7 +100,7 @@ const Dashboard = () => {
               className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
             >
               <BarChart2 className="h-5 w-5" />
-              <span>Expense Tracker</span>
+              <span>Expense and Progress Tracker</span>
             </Link>
             <Link
               to="/dashboard/learn"
@@ -126,7 +134,7 @@ const Dashboard = () => {
       {/* Main Content */}
       <main className={`p-4 ${isSidebarOpen ? "md:ml-64" : ""} transition-all duration-200`}>
         <div className="max-w-6xl mx-auto space-y-8">
-          <h1 className="text-3xl font-bold">Welcome Back!</h1>
+          <h1 className="text-3xl font-bold">Welcome!</h1>
           
           {/* Age-specific Blog Carousel */}
           <section className="space-y-4">

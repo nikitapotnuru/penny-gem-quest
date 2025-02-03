@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Progress } from "@/components/ui/progress";
-import { ArrowRight, Check, Coins, PiggyBank, Calendar } from "lucide-react";
+import { ArrowRight, Check, Coins, PiggyBank, Calendar, Camera, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -10,18 +10,45 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Logo } from "@/components/Logo";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const SignUp = () => {
   const [step, setStep] = useState(1);
-  const totalSteps = 5;
+  const totalSteps = 6; // Increased total steps
   const [age, setAge] = useState(25);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [avatarUrl, setAvatarUrl] = useState<string>("");
+  const [incomeSource, setIncomeSource] = useState<string>("");
+  const [otherIncomeSource, setOtherIncomeSource] = useState<string>("");
+  const [monthlyIncome, setMonthlyIncome] = useState<string>("");
 
   const nextStep = () => {
     if (step < totalSteps) {
       setStep(step + 1);
     }
+  };
+
+  const prevStep = () => {
+    if (step > 1) {
+      setStep(step - 1);
+    }
+  };
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setAvatarUrl(url);
+    }
+  };
+
+  const generateAvatar = () => {
+    // Generate a random avatar using DiceBear API
+    const randomSeed = Math.random().toString(36).substring(7);
+    const url = `https://api.dicebear.com/7.x/avataaars/svg?seed=${randomSeed}`;
+    setAvatarUrl(url);
   };
 
   const renderStep = () => {
@@ -67,6 +94,32 @@ const SignUp = () => {
             <div className="space-y-6">
               <h2 className="text-2xl font-bold">Profile Setup</h2>
               <div className="space-y-4">
+                <div className="flex flex-col items-center gap-4">
+                  <Avatar className="h-24 w-24">
+                    {avatarUrl ? (
+                      <AvatarImage src={avatarUrl} alt="Profile" />
+                    ) : (
+                      <AvatarFallback>
+                        <Camera className="h-12 w-12" />
+                      </AvatarFallback>
+                    )}
+                  </Avatar>
+                  <div className="flex gap-2">
+                    <Button variant="outline" onClick={() => document.getElementById('avatar-upload')?.click()}>
+                      Upload Photo
+                    </Button>
+                    <input
+                      id="avatar-upload"
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={handleFileUpload}
+                    />
+                    <Button variant="outline" onClick={generateAvatar}>
+                      Generate Avatar
+                    </Button>
+                  </div>
+                </div>
                 <div className="space-y-2">
                   <Label htmlFor="fullName">Full Name</Label>
                   <Input id="fullName" placeholder="Enter your full name" />
@@ -104,9 +157,6 @@ const SignUp = () => {
                     Age must be between 13 and 65
                   </span>
                 </div>
-                <Button className="w-full" onClick={nextStep}>
-                  Continue <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
               </div>
             </div>
             <div className="hidden md:flex items-center justify-center">
@@ -152,6 +202,65 @@ const SignUp = () => {
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-6">
+              <h2 className="text-2xl font-bold">Income Setup</h2>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label>What type of income source do you have?</Label>
+                  <Select value={incomeSource} onValueChange={setIncomeSource}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select income source" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="pocket-money">Pocket money</SelectItem>
+                      <SelectItem value="part-time">Part-time job</SelectItem>
+                      <SelectItem value="full-time">Full-time job</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {incomeSource === "other" && (
+                    <Input
+                      placeholder="Please specify"
+                      value={otherIncomeSource}
+                      onChange={(e) => setOtherIncomeSource(e.target.value)}
+                    />
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <Label>How much do you receive monthly?</Label>
+                  <Input
+                    type="text"
+                    placeholder="Enter amount in ₹"
+                    value={monthlyIncome}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/[^0-9]/g, '');
+                      setMonthlyIncome(value);
+                    }}
+                  />
+                </div>
+                <div className="flex gap-4">
+                  <Button onClick={prevStep} variant="outline">
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Back
+                  </Button>
+                  <Button 
+                    onClick={nextStep}
+                    disabled={!incomeSource || !monthlyIncome || (incomeSource === "other" && !otherIncomeSource)}
+                  >
+                    Next
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+            <div className="hidden md:flex items-center justify-center">
+              <Coins className="h-32 w-32 text-primary animate-bounce" />
+            </div>
+          </div>
+        );
+      case 5:
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-6">
               <h2 className="text-2xl font-bold">Learning Preferences</h2>
               <div className="space-y-4">
                 <div className="space-y-2">
@@ -194,7 +303,7 @@ const SignUp = () => {
             </div>
           </div>
         );
-      case 5:
+      case 6:
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-6">
