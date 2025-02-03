@@ -16,9 +16,19 @@ import {
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
 import { useToast } from "@/components/ui/use-toast";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showSignOutDialog, setShowSignOutDialog] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -45,6 +55,18 @@ const Dashboard = () => {
       title: "Navigation",
       description: "Welcome to your dashboard",
     });
+  };
+
+  const handleSignOut = () => {
+    setShowSignOutDialog(true);
+  };
+
+  const confirmSignOut = () => {
+    toast({
+      title: "Success",
+      description: "You have successfully signed out.",
+    });
+    navigate('/');
   };
 
   return (
@@ -96,34 +118,37 @@ const Dashboard = () => {
               <span>Home</span>
             </Link>
             <Link
-              to="/dashboard/expenses"
+              to="/tracker"
               className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
             >
               <BarChart2 className="h-5 w-5" />
               <span>Expense and Progress Tracker</span>
             </Link>
             <Link
-              to="/dashboard/learn"
+              to="/learn"
               className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
             >
               <BookOpen className="h-5 w-5" />
               <span>Learn</span>
             </Link>
             <Link
-              to="/dashboard/shop"
+              to="/shop"
               className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
             >
               <ShoppingBag className="h-5 w-5" />
               <span>Shop</span>
             </Link>
             <Link
-              to="/dashboard/settings"
+              to="/settings"
               className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
             >
               <Settings className="h-5 w-5" />
               <span>Settings</span>
             </Link>
-            <button className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent text-red-500 w-full">
+            <button 
+              onClick={handleSignOut}
+              className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent text-red-500 w-full"
+            >
               <LogOut className="h-5 w-5" />
               <span>Sign Out</span>
             </button>
@@ -136,38 +161,67 @@ const Dashboard = () => {
         <div className="max-w-6xl mx-auto space-y-8">
           <h1 className="text-3xl font-bold">Welcome!</h1>
           
-          {/* Age-specific Blog Carousel */}
+          {/* Financial Overview */}
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-6 bg-white rounded-lg shadow-sm space-y-2">
+              <h3 className="text-lg font-semibold">Total Balance</h3>
+              <p className="text-2xl font-bold">₹25,000</p>
+            </div>
+            <div className="p-6 bg-white rounded-lg shadow-sm space-y-2">
+              <h3 className="text-lg font-semibold">Monthly Savings</h3>
+              <p className="text-2xl font-bold">₹5,000</p>
+            </div>
+            <div className="p-6 bg-white rounded-lg shadow-sm space-y-2">
+              <h3 className="text-lg font-semibold">Reward Points</h3>
+              <p className="text-2xl font-bold">250</p>
+            </div>
+          </section>
+
+          {/* Latest Articles */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-semibold">Recommended for You</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 border rounded-lg">
-                <h3 className="font-semibold">For Teens</h3>
-                <p className="text-muted-foreground">Smart Saving Habits</p>
+            <h2 className="text-2xl font-semibold">Latest Finance-Based Articles</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 bg-white rounded-lg shadow-sm">
+                <h3 className="font-semibold">Understanding Investment Basics</h3>
+                <p className="text-muted-foreground">Learn the fundamentals of investing and how to get started...</p>
               </div>
-              <div className="p-4 border rounded-lg">
-                <h3 className="font-semibold">For Adults</h3>
-                <p className="text-muted-foreground">Investment Basics</p>
-              </div>
-              <div className="p-4 border rounded-lg">
-                <h3 className="font-semibold">For Seniors</h3>
-                <p className="text-muted-foreground">Retirement Planning</p>
+              <div className="p-4 bg-white rounded-lg shadow-sm">
+                <h3 className="font-semibold">Smart Saving Strategies</h3>
+                <p className="text-muted-foreground">Discover effective ways to save money and build wealth...</p>
               </div>
             </div>
           </section>
 
-          {/* Daily Financial Shorts */}
+          {/* Featured Videos */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-semibold">Daily Financial Shorts</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[1, 2, 3, 4, 5, 6].map((index) => (
-                <div key={index} className="aspect-video bg-accent rounded-lg flex items-center justify-center">
-                  <span className="text-muted-foreground">Video {index}</span>
+            <h2 className="text-2xl font-semibold">Featured Videos</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[1, 2, 3].map((index) => (
+                <div key={index} className="aspect-video bg-accent rounded-lg">
+                  <div className="w-full h-full flex items-center justify-center">
+                    <span className="text-muted-foreground">Video {index}</span>
+                  </div>
                 </div>
               ))}
             </div>
           </section>
         </div>
       </main>
+
+      {/* Sign Out Dialog */}
+      <AlertDialog open={showSignOutDialog} onOpenChange={setShowSignOutDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Sign Out</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to sign out?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={confirmSignOut}>OK</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
