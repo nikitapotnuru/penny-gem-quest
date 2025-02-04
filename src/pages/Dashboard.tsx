@@ -104,7 +104,7 @@ const Dashboard = () => {
         <div className="p-4 space-y-4">
           <div className="flex justify-between items-center mb-4">
             <Logo />
-            <Button variant="ghost" size="icon" onClick={closeSidebar}>
+            <Button variant="ghost" size="icon" onClick={closeSidebar} className="md:flex">
               <ArrowLeft className="h-6 w-6" />
             </Button>
           </div>
@@ -132,11 +132,11 @@ const Dashboard = () => {
               <span>Learn</span>
             </Link>
             <Link
-              to="/shop"
+              to="/quiz"
               className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
             >
-              <ShoppingBag className="h-5 w-5" />
-              <span>Shop</span>
+              <BookOpen className="h-5 w-5" />
+              <span>Skill Level and Quiz</span>
             </Link>
             <Link
               to="/settings"

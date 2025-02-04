@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Progress } from "@/components/ui/progress";
-import { ArrowRight, Check, Coins, PiggyBank, Calendar, Camera, ArrowLeft } from "lucide-react";
+import { ArrowRight, Check, Coins, PiggyBank, Calendar, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -15,7 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 const SignUp = () => {
   const [step, setStep] = useState(1);
-  const totalSteps = 6; // Increased total steps
+  const totalSteps = 5; // Updated total steps
   const [age, setAge] = useState(25);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -45,7 +45,6 @@ const SignUp = () => {
   };
 
   const generateAvatar = () => {
-    // Generate a random avatar using DiceBear API
     const randomSeed = Math.random().toString(36).substring(7);
     const url = `https://api.dicebear.com/7.x/avataaars/svg?seed=${randomSeed}`;
     setAvatarUrl(url);
@@ -288,7 +287,7 @@ const SignUp = () => {
                   <Label htmlFor="timeCommitment">Time Commitment</Label>
                   <select
                     id="timeCommitment"
-                    className="w-full p-2 border rounded-md"
+                    className="w-full p-2 border rounded-md bg-white"
                   >
                     <option value="15">15 minutes</option>
                     <option value="30">30 minutes</option>
@@ -297,65 +296,22 @@ const SignUp = () => {
                     <option value="90">1.5 hours</option>
                   </select>
                 </div>
-                <Button className="w-full" onClick={nextStep}>
-                  Continue <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-            <div className="hidden md:flex items-center justify-center">
-              <Calendar className="h-32 w-32 text-primary animate-bounce" />
-            </div>
-          </div>
-        );
-      case 6:
-        return (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-6">
-              <h2 className="text-2xl font-bold">Skill Level & Quiz</h2>
-              <div className="space-y-4">
-                <RadioGroup defaultValue="beginner">
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="beginner" id="beginner" />
-                      <Label htmlFor="beginner">Beginner</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="intermediate" id="intermediate" />
-                      <Label htmlFor="intermediate">Intermediate</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="expert" id="expert" />
-                      <Label htmlFor="expert">Expert</Label>
-                    </div>
-                  </div>
-                </RadioGroup>
-                <div className="flex gap-4">
-                  <Button variant="outline" className="flex-1" onClick={() => {
+                <Button 
+                  className="w-full" 
+                  onClick={() => {
                     toast({
                       title: "Welcome to PennyPilot!",
                       description: "Your account has been created. Let's start your financial journey!",
                     });
                     navigate('/dashboard');
-                  }}>
-                    Skip & Finish
-                  </Button>
-                  <Button 
-                    className="flex-1" 
-                    onClick={() => {
-                      toast({
-                        title: "Starting Quiz",
-                        description: "Let's test your financial knowledge!",
-                      });
-                      navigate('/quiz');
-                    }}
-                  >
-                    Take Quick Quiz
-                  </Button>
-                </div>
+                  }}
+                >
+                  Finish <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
               </div>
             </div>
             <div className="hidden md:flex items-center justify-center">
-              <Check className="h-32 w-32 text-primary animate-bounce" />
+              <Calendar className="h-32 w-32 text-primary animate-bounce" />
             </div>
           </div>
         );

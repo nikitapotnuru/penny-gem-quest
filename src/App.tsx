@@ -10,11 +10,12 @@ import Dashboard from "./pages/Dashboard";
 import Quiz from "./pages/Quiz";
 import Tracker from "./pages/Tracker";
 import Learn from "./pages/Learn";
+import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  console.log("App component rendered"); // Adding logging to track component rendering
+  console.log("App component rendered");
   
   return (
     <BrowserRouter>
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/quiz" element={<Quiz />} />
             <Route path="/tracker" element={<Tracker />} />
             <Route path="/learn" element={<Learn />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
