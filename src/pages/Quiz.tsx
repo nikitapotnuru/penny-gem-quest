@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { useNavigate } from "react-router-dom";
-import { Brain } from "lucide-react";
+import { QuizDifficultySelector } from "@/components/quiz/QuizDifficultySelector";
+import { QuizQuestion } from "@/components/quiz/QuizQuestion";
+import { QuizResults } from "@/components/quiz/QuizResults";
 
 type Difficulty = "beginner" | "intermediate" | "expert";
 
@@ -174,38 +172,14 @@ const questions: Record<Difficulty, Question[]> = {
   ]
 };
 
-const calculateRewardPoints = (score: number): number => {
-  return score * 10; // 1 correct = 10 points, 2 correct = 20 points, etc.
-};
-
-const getMotivationalMessage = (score: number): string => {
-  switch (score) {
-    case 1:
-      return "Great start! Keep learning and you'll master this in no time!";
-    case 2:
-      return "Nice effort! You're on the right track—keep going!";
-    case 3:
-      return "Well done! You're making solid progress!";
-    case 4:
-      return "Impressive! You're really getting the hang of this!";
-    case 5:
-      return "Fantastic! You're a financial whiz—keep up the amazing work!";
-    default:
-      return "Keep practicing to improve your financial knowledge!";
-  }
-};
-
 const Quiz = () => {
-  const [difficulty, setDifficulty] = useState<"beginner" | "intermediate" | "expert" | null>(null);
+  const [difficulty, setDifficulty] = useState<Difficulty | null>(null);
   const [currentAnswers, setCurrentAnswers] = useState<number[]>([]);
   const [isCompleted, setIsCompleted] = useState(false);
   const [score, setScore] = useState(0);
   const { toast } = useToast();
-  const navigate = useNavigate();
 
-  console.log("Quiz component rendered with difficulty:", difficulty);
-
-  const handleDifficultySelect = (selected: "beginner" | "intermediate" | "expert") => {
+  const handleDifficultySelect = (selected: Difficulty) => {
     console.log("Selected difficulty:", selected);
     setDifficulty(selected);
     setCurrentAnswers(new Array(5).fill(-1));
@@ -230,12 +204,9 @@ const Quiz = () => {
     setScore(correctCount);
     setIsCompleted(true);
 
-    const rewardPoints = calculateRewardPoints(correctCount);
-    const message = getMotivationalMessage(correctCount);
-
     toast({
       title: "Quiz Completed!",
-      description: `${message} You earned ${rewardPoints} reward points!`,
+      description: `You earned ${correctCount * 10} reward points!`,
     });
   };
 
@@ -248,80 +219,33 @@ const Quiz = () => {
   };
 
   if (!difficulty) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-center mb-8">
-            <Brain className="h-12 w-12 text-primary animate-bounce" />
-          </div>
-          <h1 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Financial Literacy Quiz
-          </h1>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {["beginner", "intermediate", "expert"].map((level) => (
-              <Card 
-                key={level} 
-                className="p-6 hover:shadow-lg transition-all transform hover:-translate-y-1 bg-gradient-to-br from-white to-primary/5"
-              >
-                <Button
-                  onClick={() => handleDifficultySelect(level as "beginner" | "intermediate" | "expert")}
-                  className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90"
-                >
-                  {level.charAt(0).toUpperCase() + level.slice(1)}
-                </Button>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
+    return <QuizDifficultySelector onSelect={handleDifficultySelect} />;
   }
 
   if (isCompleted) {
-    return (
-      <div className="container mx-auto px-4 py-8 text-center">
-        <h2 className="text-2xl font-bold mb-4">Quiz Results</h2>
-        <p className="text-xl mb-4">You got {score} out of 5 questions correct!</p>
-        <p className="text-lg mb-6">{getMotivationalMessage(score)}</p>
-        <p className="text-lg mb-8">You earned {calculateRewardPoints(score)} reward points!</p>
-        <div className="space-x-4">
-          <Button onClick={handleRetry}>Try Again</Button>
-          <Button onClick={() => navigate("/dashboard")} variant="outline">
-            Back to Dashboard
-          </Button>
-        </div>
-      </div>
-    );
+    return <QuizResults score={score} onRetry={handleRetry} />;
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-8 text-center">
+      <h2 className="text-2xl font-bold mb-8 text-center text-white">
         {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} Level Quiz
       </h2>
       <div className="space-y-8">
         {questions[difficulty].map((q, questionIndex) => (
-          <Card key={questionIndex} className="p-6">
-            <h3 className="text-lg font-semibold mb-4">{q.question}</h3>
-            <RadioGroup
-              value={currentAnswers[questionIndex]?.toString()}
-              onValueChange={(value) => handleAnswerSelect(questionIndex, parseInt(value))}
-            >
-              <div className="space-y-2">
-                {q.options.map((option, optionIndex) => (
-                  <div key={optionIndex} className="flex items-center space-x-2">
-                    <RadioGroupItem value={optionIndex.toString()} id={`q${questionIndex}-a${optionIndex}`} />
-                    <Label htmlFor={`q${questionIndex}-a${optionIndex}`}>{option}</Label>
-                  </div>
-                ))}
-              </div>
-            </RadioGroup>
-          </Card>
+          <QuizQuestion
+            key={questionIndex}
+            question={q}
+            questionIndex={questionIndex}
+            selectedAnswer={currentAnswers[questionIndex]}
+            onAnswerSelect={handleAnswerSelect}
+          />
         ))}
         <div className="text-center">
           <Button
             onClick={handleSubmit}
             disabled={currentAnswers.some((answer) => answer === -1)}
+            className="bg-gradient-to-r from-[#00FFFF] to-[#FF007F] hover:opacity-90"
           >
             Submit Quiz
           </Button>
