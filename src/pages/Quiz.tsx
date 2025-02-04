@@ -249,13 +249,23 @@ const Quiz = () => {
   if (!difficulty) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8 text-center">Financial Literacy Quiz</h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+            Financial Literacy Quiz
+          </h1>
+          <div className="max-w-md mx-auto">
+            <img src="/quiz-illustration.svg" alt="Quiz" className="w-48 h-48 mx-auto mb-6 animate-bounce-slow" />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {["beginner", "intermediate", "expert"].map((level) => (
-            <Card key={level} className="p-6 hover:shadow-lg transition-shadow">
+            <Card 
+              key={level} 
+              className="p-6 hover:shadow-lg transition-shadow bg-gradient-to-br from-primary/5 to-accent/5 backdrop-blur-sm"
+            >
               <Button
                 onClick={() => handleDifficultySelect(level as "beginner" | "intermediate" | "expert")}
-                className="w-full"
+                className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
                 variant="outline"
               >
                 {level.charAt(0).toUpperCase() + level.slice(1)}
@@ -286,22 +296,27 @@ const Quiz = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-8 text-center">
+      <h2 className="text-2xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
         {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} Level Quiz
       </h2>
       <div className="space-y-8">
         {questions[difficulty].map((q, questionIndex) => (
-          <Card key={questionIndex} className="p-6">
+          <Card 
+            key={questionIndex} 
+            className="p-6 bg-gradient-to-br from-primary/5 to-accent/5 backdrop-blur-sm hover:shadow-lg transition-shadow"
+          >
             <h3 className="text-lg font-semibold mb-4">{q.question}</h3>
             <RadioGroup
               value={currentAnswers[questionIndex]?.toString()}
               onValueChange={(value) => handleAnswerSelect(questionIndex, parseInt(value))}
             >
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {q.options.map((option, optionIndex) => (
-                  <div key={optionIndex} className="flex items-center space-x-2">
+                  <div key={optionIndex} className="flex items-center space-x-3 p-2 rounded-lg hover:bg-primary/5 transition-colors">
                     <RadioGroupItem value={optionIndex.toString()} id={`q${questionIndex}-a${optionIndex}`} />
-                    <Label htmlFor={`q${questionIndex}-a${optionIndex}`}>{option}</Label>
+                    <Label htmlFor={`q${questionIndex}-a${optionIndex}`} className="flex-grow cursor-pointer">
+                      {option}
+                    </Label>
                   </div>
                 ))}
               </div>
@@ -312,6 +327,7 @@ const Quiz = () => {
           <Button
             onClick={handleSubmit}
             disabled={currentAnswers.some((answer) => answer === -1)}
+            className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
           >
             Submit Quiz
           </Button>
