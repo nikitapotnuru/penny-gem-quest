@@ -5,7 +5,6 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
-import { Brain } from "lucide-react";
 
 type Difficulty = "beginner" | "intermediate" | "expert";
 
@@ -250,28 +249,19 @@ const Quiz = () => {
   if (!difficulty) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-center mb-8">
-            <Brain className="h-12 w-12 text-primary animate-bounce" />
-          </div>
-          <h1 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Financial Literacy Quiz
-          </h1>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {["beginner", "intermediate", "expert"].map((level) => (
-              <Card 
-                key={level} 
-                className="p-6 hover:shadow-lg transition-all transform hover:-translate-y-1 bg-gradient-to-br from-white to-primary/5"
+        <h1 className="text-3xl font-bold mb-8 text-center">Financial Literacy Quiz</h1>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {["beginner", "intermediate", "expert"].map((level) => (
+            <Card key={level} className="p-6 hover:shadow-lg transition-shadow">
+              <Button
+                onClick={() => handleDifficultySelect(level as "beginner" | "intermediate" | "expert")}
+                className="w-full"
+                variant="outline"
               >
-                <Button
-                  onClick={() => handleDifficultySelect(level as "beginner" | "intermediate" | "expert")}
-                  className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90"
-                >
-                  {level.charAt(0).toUpperCase() + level.slice(1)}
-                </Button>
-              </Card>
-            ))}
-          </div>
+                {level.charAt(0).toUpperCase() + level.slice(1)}
+              </Button>
+            </Card>
+          ))}
         </div>
       </div>
     );

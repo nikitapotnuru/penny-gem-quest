@@ -2,10 +2,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Settings as SettingsIcon, User, Bell, Moon, Mail } from "lucide-react";
+import { Settings as SettingsIcon } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Switch } from "@/components/ui/switch";
-import { Card } from "@/components/ui/card";
 
 const Settings = () => {
   const [username, setUsername] = useState("");
@@ -23,21 +22,13 @@ const Settings = () => {
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="flex items-center gap-4">
-          <div className="relative">
-            <SettingsIcon className="h-12 w-12 text-primary animate-spin-slow" />
-            <User className="h-6 w-6 text-accent absolute -bottom-1 -right-1" />
-          </div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Settings
-          </h1>
+          <SettingsIcon className="h-8 w-8 text-primary" />
+          <h1 className="text-3xl font-bold">Settings</h1>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Card className="p-6 space-y-6 bg-gradient-to-br from-white to-primary/5">
-            <h2 className="text-2xl font-semibold flex items-center gap-2">
-              <User className="h-5 w-5 text-primary" />
-              Profile Settings
-            </h2>
+          <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
+            <h2 className="text-2xl font-semibold">Profile Settings</h2>
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="username">Username</Label>
@@ -58,41 +49,29 @@ const Settings = () => {
                   placeholder="Enter your email"
                 />
               </div>
-              <Button onClick={handleSave} className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90">
+              <Button onClick={handleSave} className="w-full">
                 Save Changes
               </Button>
             </div>
-          </Card>
+          </div>
 
-          <Card className="p-6 space-y-6 bg-gradient-to-br from-white to-accent/5">
-            <h2 className="text-2xl font-semibold flex items-center gap-2">
-              <Bell className="h-5 w-5 text-accent" />
-              Preferences
-            </h2>
+          <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
+            <h2 className="text-2xl font-semibold">Preferences</h2>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <Label htmlFor="notifications" className="flex items-center gap-2">
-                  <Bell className="h-4 w-4" />
-                  Enable Notifications
-                </Label>
+                <Label htmlFor="notifications">Enable Notifications</Label>
                 <Switch id="notifications" />
               </div>
               <div className="flex items-center justify-between">
-                <Label htmlFor="darkMode" className="flex items-center gap-2">
-                  <Moon className="h-4 w-4" />
-                  Dark Mode
-                </Label>
+                <Label htmlFor="darkMode">Dark Mode</Label>
                 <Switch id="darkMode" />
               </div>
               <div className="flex items-center justify-between">
-                <Label htmlFor="emailUpdates" className="flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
-                  Email Updates
-                </Label>
+                <Label htmlFor="emailUpdates">Email Updates</Label>
                 <Switch id="emailUpdates" />
               </div>
             </div>
-          </Card>
+          </div>
         </div>
       </div>
     </div>
