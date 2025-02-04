@@ -1,6 +1,5 @@
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
-import { CTA } from "@/components/CTA";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -17,7 +16,6 @@ const Index = () => {
 
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
-    // For now, we'll just do a basic check
     if (email && password) {
       toast({
         title: "Success!",
@@ -40,7 +38,7 @@ const Index = () => {
       <div className="flex justify-center my-8">
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="outline">Already have an account?</Button>
+            <Button variant="outline">Sign In</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -74,7 +72,9 @@ const Index = () => {
           </DialogContent>
         </Dialog>
       </div>
-      <CTA />
+      <footer className="py-6 text-center text-muted-foreground">
+        <p>© 2024 PennyGem Quest. All rights reserved.</p>
+      </footer>
     </div>
   );
 };

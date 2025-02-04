@@ -139,6 +139,13 @@ const Dashboard = () => {
               <span>Skill Level and Quiz</span>
             </Link>
             <Link
+              to="/shop"
+              className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
+            >
+              <ShoppingBag className="h-5 w-5" />
+              <span>Shop</span>
+            </Link>
+            <Link
               to="/settings"
               className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
             >

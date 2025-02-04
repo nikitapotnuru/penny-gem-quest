@@ -11,6 +11,7 @@ import Quiz from "./pages/Quiz";
 import Tracker from "./pages/Tracker";
 import Learn from "./pages/Learn";
 import Settings from "./pages/Settings";
+import Shop from "./pages/Shop";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/tracker" element={<Tracker />} />
             <Route path="/learn" element={<Learn />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/shop" element={<Shop />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
