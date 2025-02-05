@@ -2,12 +2,12 @@ import { Rocket, Coins } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Logo = ({ className = "", size = "default" }: { className?: string; size?: "default" | "large" }) => {
-  const iconSize = size === "large" ? "h-8 w-8" : "h-6 w-6";
-  const smallIconSize = size === "large" ? "h-6 w-6" : "h-4 w-4";
-  const textSize = size === "large" ? "text-3xl" : "text-xl";
+  const iconSize = size === "large" ? "h-12 w-12" : "h-6 w-6";
+  const smallIconSize = size === "large" ? "h-8 w-8" : "h-4 w-4";
+  const textSize = size === "large" ? "text-4xl" : "text-xl";
 
   return (
-    <Link to="/" className={`flex items-center gap-3 ${className}`}>
+    <Link to="/" className={`flex items-center gap-4 ${className}`}>
       <div className="relative">
         <Rocket className={`${iconSize} text-primary animate-pulse`} />
         <Coins className={`${smallIconSize} text-accent absolute -bottom-1 -right-1`} />

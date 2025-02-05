@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
+import { Logo } from "@/components/Logo";
 
 export const Hero = () => {
   const [email, setEmail] = useState("");
@@ -33,6 +34,9 @@ export const Hero = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <div className="w-full flex justify-center py-8 bg-gradient-to-r from-primary/10 to-accent/10">
+        <Logo size="large" className="transform scale-150" />
+      </div>
       <section className="flex-grow flex items-center justify-center px-4 animate-fade-in">
         <div className="max-w-6xl mx-auto text-center">
           <span className="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary mb-4 animate-fade-up" style={{ animationDelay: "0.2s" }}>
@@ -90,9 +94,6 @@ export const Hero = () => {
           </div>
         </div>
       </section>
-      <footer className="py-4 text-center text-gray-600">
-        © 2024 PennyPilot. All rights reserved.
-      </footer>
     </div>
   );
 };
