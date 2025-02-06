@@ -1,4 +1,4 @@
-import { BookOpen, DollarSign, PiggyBank, GraduationCap, Brain } from "lucide-react";
+import { BookOpen, DollarSign, PiggyBank, GraduationCap, Brain, Briefcase, LineChart, PieChart } from "lucide-react";
 
 const Learn = () => {
   const age = 25; // This would come from user context in a real app
@@ -81,10 +81,33 @@ const Learn = () => {
 
       {/* Recommended Section */}
       <div className="bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg">
-        <h2 className="text-xl font-semibold mb-4">
+        <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+          <Briefcase className="h-6 w-6 text-[#8B5CF6]" />
           Recommended for {getAgeGroup(age)}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {getAgeGroup(age) === "Adults" && (
+            <>
+              <div className="p-6 border rounded-lg bg-gradient-to-br from-[#8B5CF6]/10 to-[#D946EF]/10 hover:from-[#8B5CF6]/20 hover:to-[#D946EF]/20 transition-all">
+                <div className="flex items-center gap-3 mb-3">
+                  <LineChart className="h-6 w-6 text-[#D946EF]" />
+                  <h3 className="font-semibold text-[#8B5CF6]">Investment Basics</h3>
+                </div>
+                <p className="text-muted-foreground">
+                  Start your investment journey with fundamental knowledge and practical strategies.
+                </p>
+              </div>
+              <div className="p-6 border rounded-lg bg-gradient-to-br from-[#F97316]/10 to-[#0EA5E9]/10 hover:from-[#F97316]/20 hover:to-[#0EA5E9]/20 transition-all">
+                <div className="flex items-center gap-3 mb-3">
+                  <PieChart className="h-6 w-6 text-[#0EA5E9]" />
+                  <h3 className="font-semibold text-[#F97316]">Career Financial Planning</h3>
+                </div>
+                <p className="text-muted-foreground">
+                  Learn to align your financial goals with your career progression for optimal growth.
+                </p>
+              </div>
+            </>
+          )}
           {getAgeGroup(age) === "Teens" && (
             <>
               <div className="p-4 border border-primary/20 rounded-lg">
@@ -97,22 +120,6 @@ const Learn = () => {
                 <h3 className="font-semibold">Understanding Money</h3>
                 <p className="text-muted-foreground">
                   Basic concepts about money management and financial responsibility.
-                </p>
-              </div>
-            </>
-          )}
-          {getAgeGroup(age) === "Adults" && (
-            <>
-              <div className="p-4 border rounded-lg">
-                <h3 className="font-semibold">Investment Basics</h3>
-                <p className="text-muted-foreground">
-                  Start your investment journey with fundamental knowledge.
-                </p>
-              </div>
-              <div className="p-4 border rounded-lg">
-                <h3 className="font-semibold">Career Financial Planning</h3>
-                <p className="text-muted-foreground">
-                  Plan your finances alongside your career growth.
                 </p>
               </div>
             </>

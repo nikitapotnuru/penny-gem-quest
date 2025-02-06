@@ -37,17 +37,10 @@ const Dashboard = () => {
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const closeSidebar = () => setIsSidebarOpen(false);
 
-  const handleUndo = () => {
-    navigate('/dashboard');
-    toast({
-      title: "Navigation",
-      description: "Welcome back to dashboard",
-    });
-  };
-
   const handleHomeClick = (e: React.MouseEvent) => {
     e.preventDefault();
     navigate('/dashboard');
+    closeSidebar();
     toast({
       title: "Navigation",
       description: "Welcome to your dashboard",
@@ -83,9 +76,6 @@ const Dashboard = () => {
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon" onClick={toggleSidebar}>
               <Menu className="h-6 w-6" />
-            </Button>
-            <Button variant="ghost" size="icon" onClick={handleUndo}>
-              <Undo2 className="h-6 w-6" />
             </Button>
           </div>
           <Logo />
