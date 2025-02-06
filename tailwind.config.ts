@@ -67,10 +67,19 @@ export default {
             opacity: "1",
           },
         },
+        "spin-slow": {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "100%": {
+            transform: "rotate(360deg)",
+          },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.5s ease-out",
         "fade-in": "fade-in 0.3s ease-out",
+        "spin-slow": "spin-slow 3s linear infinite",
       },
       backgroundColor: {
         popover: 'white',
