@@ -20,7 +20,7 @@ const EXPENSE_CATEGORIES = [
   "Others",
 ];
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8", "#82ca9d"];
+const COLORS = ["#7F00FF", "#E100FF", "#98FF98", "#00C49F", "#FFBB28", "#FF8042"];
 
 const Tracker = () => {
   const [amount, setAmount] = useState("");
@@ -42,18 +42,19 @@ const Tracker = () => {
   ];
 
   const handleAddExpense = () => {
-    // Here you would typically save the expense to your backend
     console.log("Adding expense:", { amount, category });
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-8">
-      <h1 className="text-3xl font-bold">Expense and Progress Tracker</h1>
+    <div className="p-6 max-w-7xl mx-auto space-y-8 bg-gradient-to-br from-background to-background/80">
+      <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+        Expense and Progress Tracker
+      </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Expense Pie Chart */}
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h2 className="text-xl font-semibold mb-4">Expense Distribution</h2>
+        <div className="bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg">
+          <h2 className="text-xl font-semibold mb-4 text-primary">Expense Distribution</h2>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -78,8 +79,8 @@ const Tracker = () => {
         </div>
 
         {/* Progress Pie Chart */}
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h2 className="text-xl font-semibold mb-4">Progress Overview</h2>
+        <div className="bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg">
+          <h2 className="text-xl font-semibold mb-4 text-primary">Progress Overview</h2>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -105,8 +106,8 @@ const Tracker = () => {
       </div>
 
       {/* Add Expense Section */}
-      <div className="bg-white p-6 rounded-lg shadow-sm">
-        <h2 className="text-xl font-semibold mb-4">Add New Expense</h2>
+      <div className="bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg">
+        <h2 className="text-xl font-semibold mb-4 text-primary">Add New Expense</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2">
             <Label htmlFor="category">Category</Label>
@@ -131,10 +132,11 @@ const Tracker = () => {
               placeholder="Enter amount in ₹"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
+              className="bg-white/5"
             />
           </div>
           <div className="flex items-end">
-            <Button onClick={handleAddExpense} className="w-full">
+            <Button onClick={handleAddExpense} className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90">
               + Add Expense
             </Button>
           </div>
@@ -142,13 +144,13 @@ const Tracker = () => {
       </div>
 
       {/* Spending Overview */}
-      <div className="bg-white p-6 rounded-lg shadow-sm">
-        <h2 className="text-xl font-semibold mb-4">Spending Overview</h2>
+      <div className="bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg">
+        <h2 className="text-xl font-semibold mb-4 text-primary">Spending Overview</h2>
         <div className="space-y-4">
           {expenseData.map((expense, index) => (
             <div
               key={expense.name}
-              className="flex justify-between items-center p-2 bg-gray-50 rounded"
+              className="flex justify-between items-center p-2 bg-white/5 rounded hover:bg-white/10 transition-colors"
             >
               <span>{expense.name}</span>
               <span>₹{expense.value}</span>

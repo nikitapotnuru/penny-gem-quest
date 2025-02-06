@@ -11,11 +11,13 @@ import {
   User,
   Diamond,
   Undo2,
-  ArrowLeft
+  ArrowLeft,
+  Play,
+  BookOpenCheck
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,19 +34,14 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const closeSidebar = () => {
-    setIsSidebarOpen(false);
-  };
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   const handleUndo = () => {
-    navigate(-1);
+    navigate('/dashboard');
     toast({
-      title: "Action undone",
-      description: "You've gone back to the previous page",
+      title: "Navigation",
+      description: "Welcome back to dashboard",
     });
   };
 
@@ -57,9 +54,7 @@ const Dashboard = () => {
     });
   };
 
-  const handleSignOut = () => {
-    setShowSignOutDialog(true);
-  };
+  const handleSignOut = () => setShowSignOutDialog(true);
 
   const confirmSignOut = () => {
     toast({
@@ -69,10 +64,21 @@ const Dashboard = () => {
     navigate('/');
   };
 
+  const featuredVideos = [
+    { title: "Introduction to Financial Planning", duration: "15 mins" },
+    { title: "Understanding Investment Basics", duration: "20 mins" },
+    { title: "Budgeting for Beginners", duration: "12 mins" }
+  ];
+
+  const featuredArticles = [
+    { title: "10 Tips for Smart Saving", readTime: "5 mins" },
+    { title: "Investment Strategies for Youth", readTime: "7 mins" },
+    { title: "Understanding Credit Scores", readTime: "6 mins" }
+  ];
+
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b">
+    <div className="min-h-screen bg-gradient-to-br from-background to-background/80">
+      <header className="border-b bg-white/5 backdrop-blur-lg">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon" onClick={toggleSidebar}>
@@ -85,7 +91,7 @@ const Dashboard = () => {
           <Logo />
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <Diamond className="h-5 w-5 text-primary" />
+              <Diamond className="h-5 w-5 text-primary animate-pulse" />
               <span className="font-semibold">250</span>
             </div>
             <Button variant="ghost" size="icon">
@@ -95,11 +101,10 @@ const Dashboard = () => {
         </div>
       </header>
 
-      {/* Sidebar */}
       <div
         className={`fixed inset-y-0 left-0 transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } w-64 bg-background border-r transition-transform duration-200 ease-in-out z-20 md:translate-x-0`}
+        } w-64 bg-white/10 backdrop-blur-lg border-r transition-transform duration-200 ease-in-out z-20 md:translate-x-0`}
       >
         <div className="p-4 space-y-4">
           <div className="flex justify-between items-center mb-4">
@@ -112,7 +117,7 @@ const Dashboard = () => {
             <Link
               to="/dashboard"
               onClick={handleHomeClick}
-              className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
+              className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent/20 transition-colors"
             >
               <Home className="h-5 w-5" />
               <span>Home</span>
@@ -163,51 +168,53 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Main Content */}
       <main className={`p-4 ${isSidebarOpen ? "md:ml-64" : ""} transition-all duration-200`}>
         <div className="max-w-6xl mx-auto space-y-8">
-          <h1 className="text-3xl font-bold">Welcome!</h1>
+          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">Welcome Back!</h1>
           
           {/* Financial Overview */}
           <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-6 bg-white rounded-lg shadow-sm space-y-2">
-              <h3 className="text-lg font-semibold">Total Balance</h3>
+            <div className="p-6 bg-white/10 backdrop-blur-lg rounded-lg shadow-lg space-y-2 hover:transform hover:scale-105 transition-all">
+              <h3 className="text-lg font-semibold text-primary">Total Balance</h3>
               <p className="text-2xl font-bold">₹25,000</p>
             </div>
-            <div className="p-6 bg-white rounded-lg shadow-sm space-y-2">
-              <h3 className="text-lg font-semibold">Monthly Savings</h3>
+            <div className="p-6 bg-white/10 backdrop-blur-lg rounded-lg shadow-lg space-y-2 hover:transform hover:scale-105 transition-all">
+              <h3 className="text-lg font-semibold text-primary">Monthly Savings</h3>
               <p className="text-2xl font-bold">₹5,000</p>
             </div>
-            <div className="p-6 bg-white rounded-lg shadow-sm space-y-2">
-              <h3 className="text-lg font-semibold">Reward Points</h3>
+            <div className="p-6 bg-white/10 backdrop-blur-lg rounded-lg shadow-lg space-y-2 hover:transform hover:scale-105 transition-all">
+              <h3 className="text-lg font-semibold text-primary">Reward Points</h3>
               <p className="text-2xl font-bold">250</p>
-            </div>
-          </section>
-
-          {/* Latest Articles */}
-          <section className="space-y-4">
-            <h2 className="text-2xl font-semibold">Latest Finance-Based Articles</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 bg-white rounded-lg shadow-sm">
-                <h3 className="font-semibold">Understanding Investment Basics</h3>
-                <p className="text-muted-foreground">Learn the fundamentals of investing and how to get started...</p>
-              </div>
-              <div className="p-4 bg-white rounded-lg shadow-sm">
-                <h3 className="font-semibold">Smart Saving Strategies</h3>
-                <p className="text-muted-foreground">Discover effective ways to save money and build wealth...</p>
-              </div>
             </div>
           </section>
 
           {/* Featured Videos */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-semibold">Featured Videos</h2>
+            <h2 className="text-2xl font-semibold flex items-center gap-2">
+              <Play className="h-6 w-6 text-primary" />
+              Featured Videos
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {[1, 2, 3].map((index) => (
-                <div key={index} className="aspect-video bg-accent rounded-lg">
-                  <div className="w-full h-full flex items-center justify-center">
-                    <span className="text-muted-foreground">Video {index}</span>
-                  </div>
+              {featuredVideos.map((video, index) => (
+                <div key={index} className="p-4 bg-white/10 backdrop-blur-lg rounded-lg shadow-lg hover:transform hover:scale-105 transition-all">
+                  <h3 className="font-semibold text-primary">{video.title}</h3>
+                  <p className="text-sm text-muted-foreground">{video.duration}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Featured Articles */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-semibold flex items-center gap-2">
+              <BookOpenCheck className="h-6 w-6 text-primary" />
+              Featured Articles
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {featuredArticles.map((article, index) => (
+                <div key={index} className="p-4 bg-white/10 backdrop-blur-lg rounded-lg shadow-lg hover:transform hover:scale-105 transition-all">
+                  <h3 className="font-semibold text-primary">{article.title}</h3>
+                  <p className="text-sm text-muted-foreground">{article.readTime} read</p>
                 </div>
               ))}
             </div>
