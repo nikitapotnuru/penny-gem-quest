@@ -2,43 +2,42 @@
     <!-- Background -->
     <circle cx="100" cy="100" r="95" fill="#1a1a1a" stroke="#7F00FF" stroke-width="3"/>
     
+    <!-- Owl body -->
+    <circle cx="100" cy="100" r="50" fill="#98FF98" opacity="0.9"/>
+    
+    <!-- Owl eyes (glasses) -->
+    <circle cx="80" cy="90" r="15" fill="white" stroke="#E100FF" stroke-width="2"/>
+    <circle cx="120" cy="90" r="15" fill="white" stroke="#E100FF" stroke-width="2"/>
+    <circle cx="80" cy="90" r="8" fill="#1a1a1a"/>
+    <circle cx="120" cy="90" r="8" fill="#1a1a1a"/>
+    
+    <!-- Glasses frame -->
+    <path d="M65 90 H75 M125 90 H135" stroke="#E100FF" stroke-width="2"/>
+    <path d="M95 90 H105" stroke="#E100FF" stroke-width="2"/>
+    
+    <!-- Owl beak -->
+    <path d="M95 100 L100 110 L105 100 Z" fill="#E100FF"/>
+    
+    <!-- Owl wings -->
+    <path d="M70 120 Q100 140 130 120" stroke="#7F00FF" stroke-width="3" fill="none"/>
+    
     <!-- Decorative elements -->
-    <path d="M100 40 L120 70 L80 70 Z" fill="#E100FF" opacity="0.8">
-        <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+    <circle cx="60" cy="60" r="10" fill="#7F00FF" opacity="0.7">
+        <animate attributeName="r" values="10;12;10" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="140" cy="60" r="10" fill="#E100FF" opacity="0.7">
+        <animate attributeName="r" values="10;12;10" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+    </circle>
+    
+    <!-- Question marks -->
+    <text x="50" y="150" fill="#98FF98" font-size="20" font-family="Arial">?</text>
+    <text x="140" y="150" fill="#98FF98" font-size="20" font-family="Arial">?</text>
+    
+    <!-- Animated sparkles -->
+    <path d="M40 40 L45 45 M35 45 L45 35" stroke="#E100FF" opacity="0.8">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite"/>
     </path>
-    
-    <!-- Question mark -->
-    <path d="M85 140V125H115V140H85ZM100 115C95 115 90.8333 113.667 87.5 111C84.1667 108.333 82.3333 104.667 82 100H97C97 101.333 97.5 102.5 98.5 103.5C99.5 104.5 100.667 105 102 105C103.333 105 104.5 104.5 105.5 103.5C106.5 102.5 107 101.333 107 100C107 98.6667 106.5 97.5 105.5 96.5C104.5 95.5 103.333 95 102 95H100V80H102C106.667 80 110.667 81.6667 114 85C117.333 88.3333 119 92.3333 119 97C119 101.667 117.333 105.667 114 109C110.667 112.333 106.667 114 102 114H100V115Z" fill="#98FF98"/>
-    
-    <!-- Animated circles -->
-    <circle cx="60" cy="60" r="12" fill="#7F00FF" opacity="0.7">
-        <animate attributeName="r" values="12;14;12" dur="2s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="140" cy="60" r="12" fill="#E100FF" opacity="0.7">
-        <animate attributeName="r" values="12;14;12" dur="2s" repeatCount="indefinite" begin="0.5s"/>
-    </circle>
-    <circle cx="100" cy="160" r="12" fill="#98FF98" opacity="0.7">
-        <animate attributeName="r" values="12;14;12" dur="2s" repeatCount="indefinite" begin="1s"/>
-    </circle>
-    
-    <!-- Connecting lines with gradient -->
-    <line x1="70" y1="60" x2="130" y2="60" stroke="url(#gradient1)" stroke-width="2" opacity="0.6"/>
-    <line x1="60" y1="70" x2="100" y2="150" stroke="url(#gradient2)" stroke-width="2" opacity="0.6"/>
-    <line x1="140" y1="70" x2="100" y2="150" stroke="url(#gradient3)" stroke-width="2" opacity="0.6"/>
-    
-    <!-- Gradients -->
-    <defs>
-        <linearGradient id="gradient1" x1="70" y1="60" x2="130" y2="60">
-            <stop offset="0%" stop-color="#7F00FF"/>
-            <stop offset="100%" stop-color="#E100FF"/>
-        </linearGradient>
-        <linearGradient id="gradient2" x1="60" y1="70" x2="100" y2="150">
-            <stop offset="0%" stop-color="#7F00FF"/>
-            <stop offset="100%" stop-color="#98FF98"/>
-        </linearGradient>
-        <linearGradient id="gradient3" x1="140" y1="70" x2="100" y2="150">
-            <stop offset="0%" stop-color="#E100FF"/>
-            <stop offset="100%" stop-color="#98FF98"/>
-        </linearGradient>
-    </defs>
+    <path d="M155 40 L160 45 M150 45 L160 35" stroke="#7F00FF" opacity="0.8">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
+    </path>
 </svg>

@@ -1,22 +1,6 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  Home,
-  BarChart2,
-  BookOpen,
-  ShoppingBag,
-  Settings,
-  LogOut,
-  Menu,
-  User,
-  Diamond,
-  Undo2,
-  ArrowLeft,
-  Play,
-  BookOpenCheck
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Logo } from "@/components/Logo";
+import { useNavigate } from "react-router-dom";
+import { Play, BookOpenCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import {
   AlertDialog,
@@ -27,6 +11,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
+import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
+import { FinancialOverview } from "@/components/dashboard/FinancialOverview";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -71,112 +58,22 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-background/80">
-      <header className="border-b bg-white/5 backdrop-blur-lg">
-        <div className="flex items-center justify-between p-4">
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" onClick={toggleSidebar}>
-              <Menu className="h-6 w-6" />
-            </Button>
-          </div>
-          <Logo />
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Diamond className="h-5 w-5 text-primary animate-pulse" />
-              <span className="font-semibold">250</span>
-            </div>
-            <Button variant="ghost" size="icon">
-              <User className="h-6 w-6" />
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      <div
-        className={`fixed inset-y-0 left-0 transform ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } w-64 bg-white/10 backdrop-blur-lg border-r transition-transform duration-200 ease-in-out z-20 md:translate-x-0`}
-      >
-        <div className="p-4 space-y-4">
-          <div className="flex justify-between items-center mb-4">
-            <Logo />
-            <Button variant="ghost" size="icon" onClick={closeSidebar} className="md:flex">
-              <ArrowLeft className="h-6 w-6" />
-            </Button>
-          </div>
-          <nav className="space-y-2">
-            <Link
-              to="/dashboard"
-              onClick={handleHomeClick}
-              className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent/20 transition-colors"
-            >
-              <Home className="h-5 w-5" />
-              <span>Home</span>
-            </Link>
-            <Link
-              to="/tracker"
-              className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
-            >
-              <BarChart2 className="h-5 w-5" />
-              <span>Expense and Progress Tracker</span>
-            </Link>
-            <Link
-              to="/learn"
-              className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
-            >
-              <BookOpen className="h-5 w-5" />
-              <span>Learn</span>
-            </Link>
-            <Link
-              to="/quiz"
-              className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
-            >
-              <BookOpen className="h-5 w-5" />
-              <span>Skill Level and Quiz</span>
-            </Link>
-            <Link
-              to="/shop"
-              className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
-            >
-              <ShoppingBag className="h-5 w-5" />
-              <span>Shop</span>
-            </Link>
-            <Link
-              to="/settings"
-              className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent"
-            >
-              <Settings className="h-5 w-5" />
-              <span>Settings</span>
-            </Link>
-            <button 
-              onClick={handleSignOut}
-              className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent text-red-500 w-full"
-            >
-              <LogOut className="h-5 w-5" />
-              <span>Sign Out</span>
-            </button>
-          </nav>
-        </div>
-      </div>
+      <DashboardHeader toggleSidebar={toggleSidebar} points={250} />
+      
+      <DashboardSidebar
+        isSidebarOpen={isSidebarOpen}
+        closeSidebar={closeSidebar}
+        handleHomeClick={handleHomeClick}
+        handleSignOut={handleSignOut}
+      />
 
       <main className={`p-4 ${isSidebarOpen ? "md:ml-64" : ""} transition-all duration-200`}>
         <div className="max-w-6xl mx-auto space-y-8">
-          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">Welcome Back!</h1>
+          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+            Welcome Back!
+          </h1>
           
-          {/* Financial Overview */}
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-6 bg-white/10 backdrop-blur-lg rounded-lg shadow-lg space-y-2 hover:transform hover:scale-105 transition-all">
-              <h3 className="text-lg font-semibold text-primary">Total Balance</h3>
-              <p className="text-2xl font-bold">₹25,000</p>
-            </div>
-            <div className="p-6 bg-white/10 backdrop-blur-lg rounded-lg shadow-lg space-y-2 hover:transform hover:scale-105 transition-all">
-              <h3 className="text-lg font-semibold text-primary">Monthly Savings</h3>
-              <p className="text-2xl font-bold">₹5,000</p>
-            </div>
-            <div className="p-6 bg-white/10 backdrop-blur-lg rounded-lg shadow-lg space-y-2 hover:transform hover:scale-105 transition-all">
-              <h3 className="text-lg font-semibold text-primary">Reward Points</h3>
-              <p className="text-2xl font-bold">250</p>
-            </div>
-          </section>
+          <FinancialOverview balance={25000} savings={5000} rewardPoints={250} />
 
           {/* Featured Videos */}
           <section className="space-y-4">
