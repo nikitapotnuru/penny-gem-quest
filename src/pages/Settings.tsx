@@ -12,21 +12,32 @@ const Settings = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const { toast } = useToast();
 
+  // Initialize dark mode from localStorage or system preference
   useEffect(() => {
-    // Check for saved theme preference
     const savedTheme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setIsDarkMode(savedTheme === "dark" || (!savedTheme && prefersDark));
-    
-    // Apply theme
-    document.documentElement.classList.toggle("dark", isDarkMode);
-  }, [isDarkMode]);
+    const initialDarkMode = savedTheme === "dark" || (!savedTheme && prefersDark);
+    setIsDarkMode(initialDarkMode);
+    applyTheme(initialDarkMode);
+  }, []);
+
+  const applyTheme = (isDark: boolean) => {
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+      document.documentElement.style.setProperty("--background", "240 10% 3.9%");
+      document.documentElement.style.setProperty("--foreground", "0 0% 98%");
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.style.setProperty("--background", "0 0% 100%");
+      document.documentElement.style.setProperty("--foreground", "222.2 84% 4.9%");
+    }
+  };
 
   const handleThemeToggle = () => {
     const newTheme = !isDarkMode;
     setIsDarkMode(newTheme);
     localStorage.setItem("theme", newTheme ? "dark" : "light");
-    document.documentElement.classList.toggle("dark", newTheme);
+    applyTheme(newTheme);
     
     toast({
       title: `${newTheme ? "Dark" : "Light"} mode activated`,
