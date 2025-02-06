@@ -50,26 +50,11 @@ const SignUp = () => {
     setAvatarUrl(url);
   };
 
-  const renderBackButton = () => {
-    if (step === 4) return null; // No back button for income setup
-    return (
-      <Button 
-        variant="outline" 
-        onClick={prevStep}
-        className="absolute top-4 left-4 flex items-center gap-2"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        Back
-      </Button>
-    );
-  };
-
   const renderStep = () => {
     switch (step) {
       case 1:
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
-            {renderBackButton()}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <h2 className="text-2xl font-bold">Create Your Account</h2>
               <div className="space-y-4">
@@ -104,8 +89,7 @@ const SignUp = () => {
         );
       case 2:
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
-            {renderBackButton()}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <h2 className="text-2xl font-bold">Profile Setup</h2>
               <div className="space-y-4">
@@ -184,8 +168,7 @@ const SignUp = () => {
         );
       case 3:
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
-            {renderBackButton()}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <h2 className="text-2xl font-bold">Profession Selection</h2>
               <RadioGroup defaultValue="school">
@@ -279,8 +262,7 @@ const SignUp = () => {
         );
       case 5:
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
-            {renderBackButton()}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <h2 className="text-2xl font-bold">Learning Preferences</h2>
               <div className="space-y-4">
