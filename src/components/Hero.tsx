@@ -1,3 +1,4 @@
+
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -58,7 +59,7 @@ export const Hero = () => {
             </Link>
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline">Sign In</Button>
+                <Button variant="outline">Already have an account?</Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[425px] bg-white">
                 <DialogHeader>
