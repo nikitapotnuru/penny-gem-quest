@@ -85,27 +85,15 @@ const Settings = () => {
             <h2 className="text-2xl font-semibold">Preferences</h2>
             <div className="space-y-4">
               <div className="flex items-center justify-between p-4 bg-white/5 rounded-lg">
-                <div className="flex items-center gap-2">
-                  {isDarkMode ? (
-                    <Moon className="h-5 w-5 text-primary" />
-                  ) : (
-                    <Sun className="h-5 w-5 text-primary" />
-                  )}
-                  <Label htmlFor="darkMode">Dark Mode</Label>
-                </div>
-                <Switch
-                  id="darkMode"
-                  checked={isDarkMode}
-                  onCheckedChange={handleThemeToggle}
-                  className="data-[state=checked]:bg-primary"
-                />
+                
+                
               </div>
-              <div className="flex items-center justify-between">
-                <Label htmlFor="notifications">Enable Notifications</Label>
+              <div className=" flex items-center justify-between">
+                <Label htmlFor="notifications" className="text-xl">Enable Notifications</Label>
                 <Switch id="notifications" />
               </div>
               <div className="flex items-center justify-between">
-                <Label htmlFor="emailUpdates">Email Updates</Label>
+                <Label htmlFor="emailUpdates" className="text-xl">Email Updates</Label>
                 <Switch id="emailUpdates" />
               </div>
             </div>

@@ -83,7 +83,7 @@ const Shop = () => {
             >
               <div className={`absolute inset-0 opacity-5 bg-gradient-to-br ${plan.gradient}`} />
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold shadow-lg">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 pt-[17px] pb-[10px] rounded-full text-sm font-semibold shadow-lg">
                   Most Popular
                 </div>
               )}

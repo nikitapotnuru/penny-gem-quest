@@ -16,13 +16,13 @@ import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { FinancialOverview } from "@/components/dashboard/FinancialOverview";
 
 const Dashboard = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [showSignOutDialog, setShowSignOutDialog] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-  const closeSidebar = () => setIsSidebarOpen(false);
+  const closeSidebar = () => setIsSidebarOpen(true);
 
   const handleHomeClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -70,7 +70,7 @@ const Dashboard = () => {
       <main className={`p-4 ${isSidebarOpen ? "md:ml-64" : ""} transition-all duration-200`}>
         <div className="max-w-6xl mx-auto space-y-8">
           <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-            Welcome Back!
+            Welcome !
           </h1>
           
           <FinancialOverview balance={25000} savings={5000} rewardPoints={250} />
